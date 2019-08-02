@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>(C/C++)初识单向链表</title>
+    <style type="text/css">
+        /*顶部*/
+        #top{
+            border:0 solid transparent;
+            font-family: 楷体;
+            font-size: 35px;
+            color: white;
+            font-weight:900;
+            background: url("picture/back1.jpg");
+        }
+        /*导航*/
+        #nav{
+            width:100%;
+            height:40px;
+            background: url("picture/back3.jpg");
+            margin:0 auto;
+            padding:0;
+            text-align:center;
+            font-family: 楷体;
+            list-style:none;
+        }
+        #nav li{
+            display:inline;
+            height:40px;
+            position:relative;
+            z-index:999999;/*置于顶层*/
+        }
+        #nav li a{
+            display:inline-block;
+            text-decoration:none;
+            padding-top: 0;
+            padding-right: 50px;
+            padding-left:50px;
+            padding-bottom: 0;/*调整块状导航的大小及里面文字的位置*/
+            height:40px;
+            line-height:40px;
+            color: white;
+            font-size:25px;
+            font-weight: 500;
+        }
+        #nav li a:hover{
+            background: rgba(34, 169, 227, 0.98);
+            text-decoration:none;
+        }
+        #nav li ul{
+            position:absolute;
+            display:none;
+            width:140px;
+            left:0;
+            background: url("picture/back3.jpg");
+            padding-top: 0;
+            padding-right: 0;
+            padding-left:0;
+            padding-bottom: 0;
+        }
+        #nav li ul li a{
+            display:inline-block;
+            text-decoration:none;
+            padding-right: 30px;
+            padding-left:30px;/*调整块状导航的大小及里面文字的位置*/
+            color: white;
+            font-size:20px;
+            font-weight: 500;
+        }
+        #nav li:hover ul{
+            display:block;
+        }
+        #up {
+            border:0px;
+            position:fixed;
+            bottom:10px;
+            right:10%;
+        }
+    </style>
+</head>
+
+<body background="picture/back.jpg">
+<div id="top" align="center" >雲帝<img src="picture/top.jpg">博客</div>
+<ul id="nav" >
+    <li><a href="index.html">首页</a></li>
+    <li><a href="#">博客</a></li>
+    <li><a href="#">论坛</a></li>
+    <li><a href="download.html">下载</a></li>
+    <li><a href="activity.html">活动</a></li>
+    <li><a href="#">用户</a>
+        <ul>
+            <li><a href="#">登录</a></li>
+            <li><a href="regist.html">注册</a></li>
+            <li><a href="#">写博客</a></li>
+            <li><a href="#">消息</a></li>
+        </ul>
+    </li>
+    <li><a href="#">设置</a>
+        <ul>
+            <li><a href="#">修改头像</a></li>
+            <li><a href="#">个人资料</a></li>
+            <li><a href="#">积分</a></li>
+            <li><a href="#">反馈</a></li>
+            <li><a href="#">帮助</a></li>
+        </ul>
+    </li>
+</ul>
+<!--以上是导航-->
+<img src="picture/001.jpg" width="100%">
+<!--这是导航下面的图片和设置-->
+<table width=1000" height="3350" align="center">
+    <tr>
+        <!--用户登录-->
+        <td valign="top" width="220" height="200">
+            <div style="border:1px solid black;background-color:#f8f8f8" >
+                <br>
+                <h3 align="center">用户登录与注册</h3>
+                <form method="post" action="save.php" style="text-align: center">
+                    <label for="username">账号:</label>
+                    <input type="text"  name="username" id="username" value="" /><br><br>
+                    <label for="pass">密码:</label>
+                    <input type="password"  name="pass" id="pass" value="" /><br><br>
+                    <input type="button" value="登录"  name="submit" />&nbsp;&nbsp;
+                    <input type="button" name="regist" value="注册" onclick="location.href='regist.html'" />
+                </form>
+                <br>
+                <hr size="1px" color="gray">
+                <br>
+                <!--日历-->
+                <iframe src="calender.html"  width="220" height="300" scrolling="no" frameborder="0">
+                </iframe>
+            </div>
+        </td>
+        <td valign="top" width="550" height="3350">
+            <div style="width:550px;height: 3350px;color:#ffffff;background: #000000;padding:0 5px 0 5px" ><br>
+                <h2>&nbsp;&nbsp;(C/C++)初识单向链表:</h2>
+                <span>版权声明：本文为博主原创文章，未经博主允许不得转载。</span>
+                <hr color="white">
+                <h3>第三，链表的输出，这部分比较简单。</h3><span>代码部分：<br></span>
+                <pre>/*通过过渡指针list_temp从head位置到链表结尾，移动至每个节点来实现输出成员*/
+void print_list()
+{
+    Node *list_temp = list_head;
+    cout << "*** LISTING ***" << endl;
+    while(list_temp != NULL)    //判断当前位置是否存在节点
+    {
+         cout << "id:" << list_temp->id << '\t' << "score:" << list_temp->score << endl;
+         list_temp = list_temp->next;
+    }
+    cout << "*** END OF FILE ***" << endl;
+}</pre>
+                <img src="picture/lianbiao7.png" style="width: 500px"><br>
+                <span>这里可以理解为吃烤串，不过正常的吃烤串是从竹签尖的那端开始吃，而这里的“吃烤串”是从竹签底端的肉(list_temphead)开始往上吃（即往list_temp的箭头方向移动）<br></span>
+                <h3>第四，链表的冒泡排序</h3>
+                <span>对于刚入门的菜鸟，先了解使用冒泡法排序链表，感兴趣的可以去了解快排和归并排序。<br></span>
+                <br>
+                <pre>void cmp_list() //升序冒泡排序
+{
+    Node *list_temp = NULL; //控制外循环，指向需要排序的第一个节点
+    Node *list_end = NULL;  //控制内循环，指向需要排序的最后一个节点
+    list_temp = list_head;  //指向表头
+    while(list_temp != list_end)
+    {
+        while(list_temp->next != list_end)
+        {
+            /*这里的数据交换根据实际情况，但原理相同*/
+            if(list_temp->id > list_temp->next ->id )   //当前节点的id与下一个节点的id比较
+            {
+                //用整数cache_id和cache_score分别记录当前的位置的id和score
+                int cache_id = list_temp->id;
+                int cache_score = list_temp->score;
+                //下面的代码是交换两个链表的数据
+                list_temp->id = list_temp->next->id;
+                list_temp->score = list_temp->next->score;
+                list_temp->next->id = cache_id;
+                list_temp->next->score = cache_score;
+            }
+            list_temp = list_temp->next ;
+        }
+        list_end = list_temp;   //将当前排序的最后一个节点向前挪动一个位置
+        list_temp = list_head;  //重新指向表头
+    }
+}
+</pre>
+                <span>只要能理解数组的冒泡法，相信也能理解链表的冒泡排序，因为原理是相同的。这段代码已经做过优化处理，链表无节点和只有一个节点的情况也考虑到了。<br></span>
+                <h3>第五，链表数据的插入</h3>
+                <pre>void add_point()
+{
+    cout << "请输入新数据:" << endl;
+    Node *list_temp = list_head;
+    Node *new_body = new Node();
+    /*成员赋值*/
+    cin >> new_body->id >> new_body->score;
+    new_body->next = NULL;
+
+    /*if里的思想是:如果当前是空链表或新数据比第一个数小,则这样写
+      else里的思想是:链表已排序过,所以满足插入条件是出现数据比现在的值大
+    */
+    if(list_temp == NULL || new_body->id < list_temp->id)
+    {
+        new_body->next = list_temp;
+        list_head = new_body;
+    }
+    else
+    {
+        while(list_temp->next != NULL && list_temp->id < new_body->id )
+        {
+            if(list_temp->next->id > new_body->id)
+                break;
+            list_temp = list_temp->next;
+        }
+        new_body->next = list_temp->next;
+        list_temp->next = new_body;
+    }
+}</pre>
+                <span>链表排序后的插入我认为不好写，这段代码是我经过不断优化的最终写法，也有更简单的方法，那就是在链表尾部添加新数据，接着再次调用排序（例如冒泡法）。<br>链表插入的简单思想就是插入作为第一个节点，还是不是作为第一个节点插入。事实上，用双向链表来做插入更简单。<br></span>
+                <h3>第六，链表的节点删除</h3>
+                <pre>void delete_point()
+{
+    int id;
+    cout << "请输入要删除的id:" << endl;
+    cin >> id;
+    Node *list_temp = list_head, *cache = NULL;
+    if(list_head != NULL)
+    {
+        if(id == list_temp->id)  //删除第一个节点
+        {
+            cache = list_temp->next;
+            delete (list_temp);
+            list_temp = NULL;
+            list_head = cache;
+        }
+        else    //删除其他节点
+        {
+            while(list_temp->next != NULL && id != list_temp->id)
+            {
+                cache = list_temp;
+                list_temp = list_temp->next;
+            }
+            if(id == list_temp->id)
+            {
+                cache->next = list_temp->next;
+                delete (list_temp);
+                list_temp = NULL;
+            }
+        }
+    }
+}</pre>
+                <span>链表的节点删除就是通过搜索来删除数据，主要是要考虑，当前符合的数据是链表的第一个节点还是其他节点，如果是第一个节点的话，那么就必须得修改list_head的位置。<br></span>
+                <h3>第七，链表的清空</h3>
+                <pre>void delete_all()
+{
+    if(list_head != NULL)
+    {
+        Node *list_temp = NULL, *cache = NULL;
+        list_temp = list_head;
+        while(list_temp != NULL)
+        {
+            cache= list_temp->next;
+            delete(list_temp);
+            list_temp = NULL;
+            list_temp = cache;
+        }
+    }
+    cout << "链表已清空:" << endl;
+}
+                </pre>
+                <span>链表的清空非常简单，并且链表的清空是必须的！！一定要防止内存泄漏。每次删除，建议令该节点等于NULL，防止出现小问题。<br></span><hr color="white">
+                <span>我希望我的这篇博客对链表初学者可以为提供思路，注意，链表是C++/C里很重要的一个部分，还请大家看我的代码不仅仅是复制黏贴那么简单。我的代码或许还存在一些bug或可以完善的地方，欢迎大佬们指点与讨论。<br><br></br></span>
+                <input type="button" name="nextpage" value="首页" onclick="location.href='index.html'" />
+                <input type="button" name="nextpage" value="上一页" onclick="location.href='page1.html'" />
+            </div>
+        </td>
+        <td valign="top" width="230" height="500">
+            <div style="height:210px;background-color: #f8f8f8;" align="center" >
+                <img src="picture/7.jpg" width="230"  alt="image7">
+            </div>
+            <hr>
+            <div style="height:40px;background-color: #00f8b6;font-size:35px;color: #3300CC;font-family: 华文新魏" align="center"  >
+                公告栏
+            </div>
+            <hr size="1px" color="gray">
+            <marquee  height="270" direction="up" scrollamoun="2" onmouseover="this.stop()" onMouseOut="this.start()" bgcolor="white">
+				<span style="color:blue">&nbsp;&nbsp;&nbsp;&nbsp;这个博客只是兴趣使然，分享我在编程中的心得，将会不定期更新，欢迎大家一起交流讨论。<br>
+				</span>
+            </marquee>
+        </td>
+    </tr>
+</table>
+<div id="up"><a href="#top"><img src="picture/up.jpg" width="auto" height="40" alt="image7"></a>
+</div>
+<div align="center" style="line-height:25px;height:30px;color: #f8f8f8;background-color: #253051;">
+    版权所有-2017-2020-云帝
+</div>
+</body>
+</html>
+</title>
+</head>
+<body>
+
+</body>
+</html>

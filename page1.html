@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>(C/C++)初识单向链表</title>
+    <style type="text/css">
+        /*顶部*/
+        #top{
+            border:0 solid transparent;
+            font-family: 楷体;
+            font-size: 35px;
+            color: white;
+            font-weight:900;
+            background: url("picture/back1.jpg");
+        }
+        /*导航*/
+        #nav{
+            width:100%;
+            height:40px;
+            background: url("picture/back3.jpg");
+            margin:0 auto;
+            padding:0;
+            text-align:center;
+            font-family: 楷体;
+            list-style:none;
+        }
+        #nav li{
+            display:inline;
+            height:40px;
+            position:relative;
+            z-index:999999;/*置于顶层*/
+        }
+        #nav li a{
+            display:inline-block;
+            text-decoration:none;
+            padding-top: 0;
+            padding-right: 50px;
+            padding-left:50px;
+            padding-bottom: 0;/*调整块状导航的大小及里面文字的位置*/
+            height:40px;
+            line-height:40px;
+            color: white;
+            font-size:25px;
+            font-weight: 500;
+        }
+        #nav li a:hover{
+            background: rgba(34, 169, 227, 0.98);
+            text-decoration:none;
+        }
+        #nav li ul{
+            position:absolute;
+            display:none;
+            width:140px;
+            left:0;
+            background: url("picture/back3.jpg");
+            padding-top: 0;
+            padding-right: 0;
+            padding-left:0;
+            padding-bottom: 0;
+        }
+        #nav li ul li a{
+            display:inline-block;
+            text-decoration:none;
+            padding-right: 30px;
+            padding-left:30px;/*调整块状导航的大小及里面文字的位置*/
+            color: white;
+            font-size:20px;
+            font-weight: 500;
+        }
+        #nav li:hover ul{
+            display:block;
+        }
+        #up {
+            border:0px;
+            position:fixed;
+            bottom:10px;
+            right:10%;
+        }
+    </style>
+</head>
+
+<body background="picture/back.jpg">
+<div id="top" align="center" >雲帝<img src="picture/top.jpg">博客</div>
+<ul id="nav" >
+    <li><a href="index.html">首页</a></li>
+    <li><a href="#">博客</a></li>
+    <li><a href="#">论坛</a></li>
+    <li><a href="download.html">下载</a></li>
+    <li><a href="activity.html">活动</a></li>
+    <li><a href="#">用户</a>
+        <ul>
+            <li><a href="#">登录</a></li>
+            <li><a href="regist.html">注册</a></li>
+            <li><a href="#">写博客</a></li>
+            <li><a href="#">消息</a></li>
+        </ul>
+    </li>
+    <li><a href="#">设置</a>
+        <ul>
+            <li><a href="#">修改头像</a></li>
+            <li><a href="#">个人资料</a></li>
+            <li><a href="#">积分</a></li>
+            <li><a href="#">反馈</a></li>
+            <li><a href="#">帮助</a></li>
+        </ul>
+    </li>
+</ul>
+<!--以上是导航-->
+<img src="picture/001.jpg" width="100%">
+<!--这是导航下面的图片和设置-->
+<table width=1000" height="2150" align="center">
+    <tr>
+        <!--用户登录-->
+        <td valign="top" width="220" height="200">
+            <div style="border:1px solid black;background-color:#f8f8f8" >
+                <br>
+                <h3 align="center">用户登录与注册</h3>
+                <form method="post" action="save.php" style="text-align: center">
+                    <label for="username">账号:</label>
+                    <input type="text"  name="username" id="username" value="" /><br><br>
+                    <label for="pass">密码:</label>
+                    <input type="password"  name="pass" id="pass" value="" /><br><br>
+                    <input type="button" value="登录"  name="submit" />&nbsp;&nbsp;
+                    <input type="button" name="regist" value="注册" onclick="location.href='regist.html'" />
+                </form>
+                <br>
+                <hr size="1px" color="gray">
+                <br>
+                <!--日历-->
+                <iframe src="calender.html"  width="220" height="300" scrolling="no" frameborder="0">
+                </iframe>
+            </div>
+        </td>
+        <td valign="top" width="550" height="2150">
+            <div style="width:550px;height: 2150px;color:#ffffff;background: #000000;padding:0 5px 0 5px" ><br>
+                <h2>&nbsp;&nbsp;(C/C++)初识单向链表:</h2>
+                <span>版权声明：本文为博主原创文章，未经博主允许不得转载。</span>
+                <hr color="white">
+                <span>第一次写博客，如果写得不好请谅解，欢迎大佬们一起交流讨论。<br>在我初学链表的时候，会觉得书上讲解十分抽象，理解到头炸，在通过做题的方式后，对链表又产生了新的认识和看法，使用链表的方式更加灵活了，通过这篇文章与大家分享一下单向链表的一些知识。
+                <br>本文章主要讲单向链表：<br><b>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;创建<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;输出<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;排序<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;插入<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;删除<br>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;清空</b>
+                </span>
+                <hr color="white">
+                <span>链表是一种重要的数据结构，它是动态地进行储存分配的一种结构，并且链表必须用指针变量才能实现（重点!）。</span>
+                <h3>首先，建立动态链表</h3>
+                <span>建立动态链表，就是在程序运行中根据需求向系统申请储存空间，类似int *m = new int[n]的方式构造动态数组，概念是一种从无到有地建立新节点，并将各节点连接形成链表。<br>这篇文章以成员为id和成绩作为例子，通过C++实现。<br>环境：Code::Blocks_16.1 && VS2017</span>
+                <h3>第二，接下来要讲如何实现建立动态链表，先放代码再继续讲解。</h3>
+                <pre>void scan() //创建链表
+{
+    int id;
+    Node *list_temp;        //过渡指针，负责将各节点连接
+    list_head = NULL;       //作为头部，还没有输入，此时为NULL
+    list_temp = list_head;  //将过渡指针指向头部，即从第一个节点开始
+    cout <<  “请输入id和score:” << endl;
+    while(cin >> id,id) //判断输入id是否非0
+    {
+        Node *list_body = new Node();
+        //申请空间，这里的括号可以删除，但为了增加程序的可读性，建议保留
+        list_body->id = id;
+        cin >> list_body->score;
+        list_body->next = NULL;
+/*以上是成员赋值，因为是单向链表的使用，所以next必须为NULL*/
+        if(list_head == NULL)
+        //如果新节点是第一个节点，则将这个节点连接到头部list_head
+            list_head = list_body;
+        else    //此时不是第一个节点，使用过渡指针list_temp将节点与新节点连接
+            list_temp->next = list_body;
+        list_temp = list_body;  //过渡指针移动至新节点
+    }
+}
+                </pre><br>
+                <span>假如把链表比作串烤串，那么一开始的链表就是一根竹签（list_head = NULL）</span>
+                <img src="picture/lianbiao3.png" style="width: 500px"><br>
+                <span>之后每串入一块肉(body)，就是new了一个新节点，并且这串肉首尾相连，竹签从肉出去的地方就是它的尾部（next），当没有下一个肉串入时，next = NULL
+（list_body_1->next = list_body_2; list_body_2->next = list_body_3; …….; list_body_n-1->next = list_body_n; 注意！list_body_n->next = NULL）</span><br>
+                <img src="picture/lianbiao4.png" style="width: 500px"><br>
+                <img src="picture/lianbiao5.png" style="width: 500px"><br>
+                <span>看上去将“肉”串在一起用编程实现很困难，其实只要通过指针list_temp就可以实现将各块“肉”首尾相连，这里我将指针list_temp称为过渡指针。<br><br>指针list_temp是通过，将新节点的地址复制给next来实现节点连接，这块的知识我自己学都觉得很抽象，得通过图文结合来理解，建立起框架。<br><br>指针list_temp是不停变换的，每次连接好节点后，便会移动至新节点的位置，不改变其他变量，确保不会指针漂移。<br></span>
+                <img src="picture/lianbiao6.png" style="width: 500px"><br><br><br><input type="button" name="nextpage" value="首页" onclick="location.href='index.html'" />
+                <input type="button" name="nextpage" value="下一页" onclick="location.href='page1.2.html'" />
+            </div>
+        </td>
+        <td valign="top" width="230" height="500">
+            <div style="height:210px;background-color: #f8f8f8;" align="center" >
+                <img src="picture/7.jpg" width="230"  alt="image7">
+            </div>
+            <hr>
+            <div style="height:40px;background-color: #00f8b6;font-size:35px;color: #3300CC;font-family: 华文新魏" align="center"  >
+                公告栏
+            </div>
+            <hr size="1px" color="gray">
+            <marquee  height="270" direction="up" scrollamoun="2" onmouseover="this.stop()" onMouseOut="this.start()" bgcolor="white">
+				<span style="color:blue">&nbsp;&nbsp;&nbsp;&nbsp;这个博客只是兴趣使然，分享我在编程中的心得，将会不定期更新，欢迎大家一起交流讨论。<br>
+				</span>
+            </marquee>
+        </td>
+    </tr>
+</table>
+<div id="up"><a href="#top"><img src="picture/up.jpg" width="auto" height="40" alt="image7"></a>
+</div>
+<div align="center" style="line-height:25px;height:30px;color: #f8f8f8;background-color: #253051;">
+    版权所有-2017-2020-云帝
+</div>
+</body>
+</html>

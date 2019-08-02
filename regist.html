@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>注册</title>
+    <style type="text/css">
+        /*顶部*/
+        #top{
+            border:0 solid transparent;
+            font-family: 楷体;
+            font-size: 35px;
+            color: white;
+            font-weight:900;
+            background: url("picture/back1.jpg");
+        }
+        /*导航*/
+        #nav{
+            width:100%;
+            height:40px;
+            background: url("picture/back3.jpg");
+            margin:0 auto;
+            padding:0;
+            text-align:center;
+            font-family: 楷体;
+            list-style:none;
+        }
+        #nav li{
+            display:inline;
+            height:40px;
+            position:relative;
+            z-index:999999;/*置于顶层*/
+        }
+        #nav li a{
+            display:inline-block;
+            text-decoration:none;
+            padding-top: 0;
+            padding-right: 50px;
+            padding-left:50px;
+            padding-bottom: 0;/*调整块状导航的大小及里面文字的位置*/
+            height:40px;
+            line-height:40px;
+            color: white;
+            font-size:25px;
+            font-weight: 500;
+        }
+        #nav li a:hover{
+            background: rgba(34, 169, 227, 0.98);
+            text-decoration:none;
+        }
+        #nav li ul{
+            position:absolute;
+            display:none;
+            width:140px;
+            left:0;
+            background: url("picture/back3.jpg");
+            padding-top: 0;
+            padding-right: 0;
+            padding-left:0;
+            padding-bottom: 0;
+        }
+        #nav li ul li a{
+            display:inline-block;
+            text-decoration:none;
+            padding-right: 30px;
+            padding-left:30px;/*调整块状导航的大小及里面文字的位置*/
+            color: white;
+            font-size:20px;
+            font-weight: 500;
+        }
+        #nav li:hover ul{
+            display:block;
+        }#content h1{
+             padding:10px;
+         }
+        #content p {
+            color: white;
+            padding:2px 2px;
+            line-height:160%;
+        }
+        #content p label{
+            width:130px;
+            display:block;
+            float:left;
+            text-align:right;
+            padding-right:5px;
+        }
+        input[type = "text"]:focus,input[type = "password"]:focus{
+            background:#ebf9ea;
+        }
+        input[type = "password"]{
+            width:80px;
+        }
+        .input_text_max{
+            width:278px;
+        }
+    </style>
+</head>
+
+<body background="picture/back.jpg" >
+<div id="top" align="center" >雲帝<img src="picture/top.jpg">博客</div>
+<ul id="nav" >
+    <li><a href="index.html">首页</a></li>
+    <li><a href="#">博客</a></li>
+    <li><a href="#">论坛</a></li>
+    <li><a href="download.html">下载</a></li>
+    <li><a href="activity.html">活动</a></li>
+    <li><a href="#">用户</a>
+        <ul>
+            <li><a href="#">登录</a></li>
+            <li><a href="regist.html">注册</a></li>
+            <li><a href="#">写博客</a></li>
+            <li><a href="#">消息</a></li>
+        </ul>
+    </li>
+    <li><a href="#">设置</a>
+        <ul>
+            <li><a href="#">修改头像</a></li>
+            <li><a href="#">个人资料</a></li>
+            <li><a href="#">积分</a></li>
+            <li><a href="#">反馈</a></li>
+            <li><a href="#">帮助</a></li>
+        </ul>
+    </li>
+</ul>
+<!--以上是导航-->
+<img src="picture/001.jpg" width="100%">
+<div style="margin-left:30%;margin-right:30%;border: 0;height:30px;width: 40%">
+    <a href="index.html" style="font-size: 15px;color: white">Back to Home</a>
+</div>
+<div id="content" style="border: 1px solid black;height:680px;width: 40%;margin:auto;padding: 0px 20px 2px 20px;background-color: rgba(0,0,0,0.98)">
+    <h1 style="color: white">Creat An Account</h1>
+    <p style="color: red">This is a free website, but you need to login. If you don't have an account, please register first. </p>
+    <p>
+        <label for="username">username:</label>
+        <input type="text" name="username" id="username"/>
+    </p>
+    <p>
+        <label for="password">password:</label>
+        <input type="password" name="password" id="password"/>
+    </p>
+    <p>
+        <label for="password_again">password(again):</label>
+        <input type="password" name="password_again" id="password_again"/>
+    </p>
+    <p>
+        <label for="email address">Email Address:</label>
+        <input type="text" name="email address" id="email address"/>
+    </p>
+    <p>select question and answer help you reset your password <br>if you forget it.
+    </p>
+    <p>
+        <label for="Select Question">Select Question:</label>
+        <input type="text" name="Select Question" id="Select Question" class="input_text_max"/>
+    </p>
+    <div style="color:red;padding:0 30px 0 140px;">
+        enter a question you can answer easily but others would find hard to guess .exanple what was the name of my pet
+    </div>
+    <p>
+        <label for="select answer">Select Answer:</label>
+        <input type="text" name="select answer" id="select answer" class="input_text_max"/>
+    </p>
+    <br>
+    <div style="padding-left: 35%">
+        <input type="button" value="sign in &raquo;" style="margin: auto" name="submit" />
+    </div>
+</div>
+<div align="center" style="line-height:25px;height:30px;color: #f8f8f8;background-color: #253051;">
+    版权所有-2017-2020-云帝
+</div>
+</body>
+</html>
